@@ -1,24 +1,29 @@
 <template>
     <div class="m-main-wrapper">
-
-        <m-catalog/>
-        <m-cart/>
+        <h1>wrapper</h1>
+        <keep-alive>
+            <router-view/>
+        </keep-alive>
     </div>
 </template>
 
 <script>
-    import MCatalog from "./catalog/m-catalog";
-    import MCart from "./cart/m-cart";
 
     export default {
         name: "m-main-wrapper",
-        components: {MCart, MCatalog},
-        data: () => {
-
-        }
+        data() {
+            return {}
+        },
+        computed: {}
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+    .m-main-wrapper {
+    }
 
+    h1 {
+        background-color: #ff5c18;
+        color: white;
+    }
 </style>
