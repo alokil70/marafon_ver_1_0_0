@@ -17,12 +17,7 @@
     export default {
         name: "m-catalog-item",
         props: {
-            product: {
-                type: Object,
-                default() {
-                    return undefined
-                }
-            }
+            product: Object
         },
         data() {
             return {}

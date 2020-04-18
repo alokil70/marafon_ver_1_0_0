@@ -30,7 +30,13 @@ let store = new Vuex.Store({
                 state.cart.push(payload)
             }
         },
-        DELETE_FROM_CART: (state, index) => state.cart.splice(index, 1)
+        DELETE_FROM_CART: (state, index) => state.cart.splice(index, 1),
+        DECREMENT_ITEM_CART: (state, index) => {
+            if (state.cart[index].quantity > 1) state.cart[index].quantity--
+        },
+        INCREMENT_ITEM_CART: (state, index) => {
+            state.cart[index].quantity++
+        },
     },
     actions: {
         GET_PRODUCTS_FROM_API({commit}) {
@@ -58,12 +64,18 @@ let store = new Vuex.Store({
         },
         DELETE_FROM_CART({commit}, index) {
             commit('DELETE_FROM_CART', index)
-        }
+        },
+        INCREMENT_ITEM_CART({commit}, index) {
+            commit('INCREMENT_ITEM_CART', index)
+        },
+        DECREMENT_ITEM_CART({commit}, index) {
+            commit('DECREMENT_ITEM_CART', index)
+        },
     },
     getters: {
         PRODUCTS: state => state.products,
         CATEGORY: state => state.category,
-        CART: state => state.cart
+        CART: state => state.cart,
     }
 })
 
