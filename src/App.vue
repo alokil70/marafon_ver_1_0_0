@@ -17,12 +17,16 @@
 
 <style lang="scss">
     #app {
-        font-family: Avenir, Helvetica, Arial, sans-serif;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        font-family: 'Montserrat', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         margin: 0;
         padding: 0;
-        text-align: center;
         color: #2c3e50;
     }
 </style>

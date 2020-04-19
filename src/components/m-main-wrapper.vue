@@ -1,6 +1,12 @@
 <template>
     <div class="m-main-wrapper">
-        <h1>wrapper</h1>
+        <div class="m-main-wrapper__pageTitle">
+            <span class="m-main-wrapper__title">MARAFON{{printInput}}</span>
+            <m-text-field
+                    v-model="printInput"
+            />
+        </div>
+
         <keep-alive>
             <router-view/>
         </keep-alive>
@@ -8,22 +14,34 @@
 </template>
 
 <script>
+    import MTextField from "./m-textField";
 
     export default {
         name: "m-main-wrapper",
+        components: {MTextField},
         data() {
-            return {}
+            return {
+                printInput: ''
+            }
         },
-        computed: {}
+        computed: {},
+        methods: {}
     }
 </script>
 
 <style lang="scss" scoped>
     .m-main-wrapper {
-    }
 
-    h1 {
-        background-color: #ff5c18;
-        color: white;
+        &__pageTitle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ff5c18;
+        }
+        &__title {
+            font-size: 30px;
+            padding-left: $padding*2;
+            color: white;
+        }
     }
 </style>
