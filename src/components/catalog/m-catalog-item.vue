@@ -1,21 +1,25 @@
 <template>
     <div class="m-catalog-item">
         <img class="m-catalog-item__img" :src="imageName()" alt="">
-        <p class="m-catalog-item__name">{{product.productName}}</p>
-        <p class="m-catalog-item__price">{{product.price}} Р</p>
-        <button
-                class="m-catalog-item__add_to_cart_btn"
-                @click="addToCartBtn"
-        >Add
-        </button>
+        <div class="m-catalog-item__cardText">
+            <p class="m-catalog-item__name">{{product.productName}}</p>
+            <p class="m-catalog-item__price">{{product.price}} Р</p>
+
+            <m-btn
+                    title="Добавить"
+                    :disabled="false"
+                    @click="addToCartBtn"/>
+        </div>
     </div>
 </template>
 
 <script>
     import {URL} from "../../const";
+    import MBtn from "../m-btn";
 
     export default {
         name: "m-catalog-item",
+        components: {MBtn},
         props: {
             product: Object
         },
@@ -42,6 +46,9 @@
 
         &__img {
             max-width: 400px;
+        }
+        &__cardText {
+            padding: $padding;
         }
     }
 </style>

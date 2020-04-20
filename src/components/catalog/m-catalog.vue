@@ -5,7 +5,6 @@
                 :selected="selected"
                 @selectOption="selectOption"
         />
-        <m-btn title="Press"/>
         <router-link :to="{name: 'cart'}">
             <div class="m-catalog__link_to_cart">Cart: {{CART.length}}</div>
         </router-link>
@@ -27,11 +26,10 @@
     import MCatalogItem from "./m-catalog-item";
     import {mapGetters, mapActions} from 'vuex'
     import MCategorySelect from "../m-category-select";
-    import MBtn from "../m-btn";
 
     export default {
         name: "m-catalog",
-        components: {MBtn, MCategorySelect, MCatalogItem},
+        components: {MCategorySelect, MCatalogItem},
         data() {
             return {
                 options: [
@@ -57,7 +55,7 @@
             },
             selectOption(option) {
                 this.selected = option.name
-            }
+            },
         },
         mounted() {
             this.GET_PRODUCTS_FROM_API()

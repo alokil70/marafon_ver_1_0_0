@@ -1,5 +1,9 @@
 <template>
-    <div class="m-btn">
+    <div
+            class="m-btn"
+            :class="{'disabled' : disabled}"
+            @click="click"
+    >
         <span>{{title}}</span>
     </div>
 </template>
@@ -8,17 +12,32 @@
     export default {
         name: "m-btn",
         props: {
-            title: String
+            title: String,
+            disabled: Boolean
+        },
+        methods: {
+            click() {
+                this.$emit('click')
+            }
         }
     }
 </script>
 
 <style scoped>
 .m-btn {
-    border-radius: 4px;
     padding: 8px 16px;
-    color: #fff;
-    background: red;
-    max-width: 100px;
+    text-align: center;
+    color: #ffffff;
+    background-color: red;
+    width: fit-content;
+    user-select: none;
+    cursor: pointer;
 }
+    .m-btn:hover {
+        background: #ff3535;
+    }
+    .disabled {
+        pointer-events: none;
+        background-color: #aeaeae;
+    }
 </style>
