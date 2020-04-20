@@ -1,6 +1,6 @@
 <template>
     <div class="m-catalog-item">
-        <img class="m-catalog-item__img" :src="imageName()" alt="">
+        <img class="m-catalog-item__img" :src="imageName" alt="">
         <div class="m-catalog-item__cardText">
             <p class="m-catalog-item__name">{{product.productName}}</p>
             <p class="m-catalog-item__price">{{product.price}} Р</p>
@@ -8,6 +8,7 @@
             <m-btn
                     title="Добавить"
                     :disabled="false"
+                    :error="false"
                     @click="addToCartBtn"/>
         </div>
     </div>
@@ -26,12 +27,14 @@
         data() {
             return {}
         },
+        computed: {
+            imageName() {
+                return URL + '/uploads/' + this.product.imageName
+            }
+        },
         methods: {
             addToCartBtn() {
                 this.$emit('addToCart', this.product)
-            },
-            imageName() {
-                return URL + '/uploads/' + this.product.imageName
             }
         }
     }

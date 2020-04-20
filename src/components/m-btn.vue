@@ -1,9 +1,10 @@
 <template>
     <div
             class="m-btn"
-            :class="{'disabled' : disabled}"
+            :class="className"
             @click="click"
     >
+        <i class="material-icons">edit</i>
         <span>{{title}}</span>
     </div>
 </template>
@@ -13,7 +14,16 @@
         name: "m-btn",
         props: {
             title: String,
-            disabled: Boolean
+            disabled: Boolean,
+            error: Boolean
+        },
+        computed: {
+            className() {
+                return {
+                    'disabled': this.disabled,
+                    'error': this.error
+                }
+            }
         },
         methods: {
             click() {
@@ -24,20 +34,32 @@
 </script>
 
 <style scoped>
-.m-btn {
-    padding: 8px 16px;
-    text-align: center;
-    color: #ffffff;
-    background-color: red;
-    width: fit-content;
-    user-select: none;
-    cursor: pointer;
-}
+    .m-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 16px;
+        color: #ffffff;
+        background-color: green;
+        width: fit-content;
+        user-select: none;
+        cursor: pointer;
+    }
+
     .m-btn:hover {
         background: #ff3535;
     }
+
+    .material-icons {
+        margin-right: 8px
+    }
+
     .disabled {
         pointer-events: none;
         background-color: #aeaeae;
+    }
+
+    .error {
+        background-color: red;
     }
 </style>
