@@ -11,6 +11,9 @@
 
         <h1>Catalog</h1>
 
+        <m-slider
+                :arr_data="PRODUCTS"
+        />
         <div class="m-catalog__list">
             <m-catalog-item
                     v-for="product in PRODUCTS"
@@ -26,10 +29,11 @@
     import MCatalogItem from "./m-catalog-item";
     import {mapGetters, mapActions} from 'vuex'
     import MCategorySelect from "../m-category-select";
+    import MSlider from "../slider/m-slider";
 
     export default {
         name: "m-catalog",
-        components: {MCategorySelect, MCatalogItem},
+        components: {MSlider, MCategorySelect, MCatalogItem},
         data() {
             return {
                 options: [
