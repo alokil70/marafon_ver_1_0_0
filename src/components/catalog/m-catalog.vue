@@ -1,9 +1,9 @@
 <template>
     <div class="m-catalog">
         <m-category-select
-                :options="options"
+                :options="CATEGORY"
                 :selected="selected"
-                @selectOption="selectOption"
+                @selectOption="sortByCategoryName"
         />
         <router-link :to="{name: 'cart'}">
             <div class="m-catalog__link_to_cart">Cart: {{CART.length}}</div>
@@ -11,12 +11,9 @@
 
         <h1>Catalog</h1>
 
-        <m-slider
-                :arr_data="PRODUCTS"
-        />
         <div class="m-catalog__list">
             <m-catalog-item
-                    v-for="product in PRODUCTS"
+                    v-for="product in filtered"
                     :key="product.id"
                     :product="product"
                     @addToCart="addToCart"
@@ -29,25 +26,25 @@
     import MCatalogItem from "./m-catalog-item";
     import {mapGetters, mapActions} from 'vuex'
     import MCategorySelect from "../m-category-select";
-    import MSlider from "../slider/m-slider";
 
     export default {
         name: "m-catalog",
-        components: {MSlider, MCategorySelect, MCatalogItem},
+        components: {MCategorySelect, MCatalogItem},
         data() {
             return {
-                options: [
-                    {name: 'option 1', value: 1},
-                    {name: 'option 2', value: 2},
-                    {name: 'option 3', value: 3},
-                    {name: 'option 4', value: 4},
-                    {name: 'option 5', value: 5},
-                ],
-                selected: 'Выбрать'
+                selected: 'Выбрать',
+                sortedProducts: []
             }
         },
         computed: {
-            ...mapGetters(['PRODUCTS', 'CART'])
+            ...mapGetters(['PRODUCTS', 'CART', 'CATEGORY']),
+            filtered() {
+                if (this.sortedProducts.length) {
+                    return this.sortedProducts
+                }else {
+                    return this.PRODUCTS
+                }
+            }
         },
         methods: {
             ...mapActions([
@@ -55,15 +52,22 @@
             ]),
             addToCart(data) {
                 this.ADD_TO_CART(data)
-                console.log([2, 4, 8, 9, 1, 3, 5, 7, 6].filter(i => !(i % 2)).reduceRight((accum, i) => accum + Math.sqrt(i), 0))
             },
-            selectOption(option) {
-                this.selected = option.name
+            sortByCategoryName(option) {
+                this.selected = option.categoryName
+                this.sortedProducts = []
+                this.PRODUCTS.map(item => {
+                    if (item.CategoryId === option.id) {
+                        this.sortedProducts.push(item)
+                    }
+
+                })
             },
         },
         mounted() {
             this.GET_PRODUCTS_FROM_API()
             this.GET_CATEGORY_FROM_API()
+
         }
     }
 </script>

@@ -7,9 +7,9 @@
             <div v-if="areOptionsVisible"
                  class="options">
                 <p v-for="option in options"
-                   :key="option.value"
-                @click="selectOption(option)">
-                    {{option.name}}
+                   :key="option.id"
+                   @click="selectOption(option)">
+                    {{option.categoryName}}
                 </p>
             </div>
         </div>
@@ -72,6 +72,7 @@
         width: 100%;
         border: solid #aeaeae;
     }
+
     .options p:hover {
         background-color: #aeaeae;
     }
