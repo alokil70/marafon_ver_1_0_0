@@ -10,13 +10,13 @@
         </router-link>
 
         <h1>Catalog</h1>
-
         <div class="m-catalog__list">
+            <m-product-item v-for="product in filtered"
+                            :key="product.id"
+                            :product="product"
+                            @addToCart="addToCart"/>
             <m-catalog-item
-                    v-for="product in filtered"
-                    :key="product.id"
-                    :product="product"
-                    @addToCart="addToCart"
+
             />
         </div>
     </div>
@@ -26,10 +26,11 @@
     import MCatalogItem from "./m-catalog-item";
     import {mapGetters, mapActions} from 'vuex'
     import MCategorySelect from "../m-category-select";
+    import MProductItem from "./m-product-item";
 
     export default {
         name: "m-catalog",
-        components: {MCategorySelect, MCatalogItem},
+        components: {MProductItem, MCategorySelect, MCatalogItem},
         data() {
             return {
                 selected: 'Выбрать',
